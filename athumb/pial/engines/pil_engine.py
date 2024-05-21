@@ -1,4 +1,4 @@
-from cStringIO import StringIO
+from io import BytesIO
 from athumb.pial.engines.base import EngineBase
 
 try:
@@ -19,7 +19,7 @@ class PILEngine(EngineBase):
         :rtype: PIL.Image
         :returns: The loaded image.
         """
-        buf = StringIO(source.read())
+        buf = BytesIO(source.read())
         return Image.open(buf)
 
     def get_image_size(self, image):
@@ -40,7 +40,7 @@ class PILEngine(EngineBase):
         :rtype: bool
         :returns: ``True`` if ``raw_data`` is valid, ``False`` if not.
         """
-        buf = StringIO(raw_data)
+        buf = BytesIO(raw_data)
         try:
             trial_image = Image.open(buf)
             trial_image.verify()
@@ -119,7 +119,7 @@ class PILEngine(EngineBase):
         :returns: A string representation of the image.
         """
         ImageFile.MAXBLOCK = 1024 * 1024
-        buf = StringIO()
+        buf = BytesIO()
 
         try:
             # ptimize makes the encoder do a second pass over the image, if
