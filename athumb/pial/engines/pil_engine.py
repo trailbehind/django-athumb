@@ -80,7 +80,7 @@ class PILEngine(EngineBase):
         :rtype: PIL.Image
         :returns: The scaled image. 
         """
-        return image.resize((width, height), resample=Image.ANTIALIAS)
+        return image.resize((width, height), resample=Image.LANCZOS)
 
     def _crop(self, image, width, height, x_offset, y_offset):
         """
